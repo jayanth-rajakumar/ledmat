@@ -11,3 +11,5 @@ First assemble the hardware according to the schematics. A full tutorial will be
 6. Search for USE_PAROLA_HW and replace the 1 next to it with a 0. Search for your hardware (usually USE_FC16_HW, see the full tutorial for more information) and replace the 0 next to it with a 1. Save the file and close it.
 7. Download this repository and extract the ledmat.ino file. Open it, set the board to Arduino Nano in the Tools menu. Also make sure the correct Port is selected.
 8. Upload the sketch, plug in the stackmat and enjoy!
+
+![Prototype](https://raw.github.com/jayanth-rajakumar/ledmat/master/img_prototype.jpg)
