@@ -43,8 +43,7 @@ MD_MAX72XX::fontType_t xantofont[] PROGMEM = {
   5, 30, 16, 16, 16, 16,    // 28 - 'Angled'
   5, 12, 30, 12, 30, 12,    // 29 - 'Squashed #'
   5, 48, 56, 62, 56, 48,    // 30 - 'Up Pointer'
-  5, 6, 14, 62, 14, 6,    // 31 - 'Down Pointer'
-  2, 0, 0,    // 32 - 'Space'
+yg  2, 0, 0,    // 32 - 'Space'
   1, 95,    // 33 - '!'
   3, 7, 0, 7,   // 34 - '"'
   5, 20, 127, 20, 127, 20,    // 35 - '#'
@@ -57,7 +56,7 @@ MD_MAX72XX::fontType_t xantofont[] PROGMEM = {
   5, 42, 28, 127, 28, 42,   // 42 - '*'
   5, 8, 8, 62, 8, 8,    // 43 - '+'
   3, 128, 112, 48,    // 44 - ','
-  5, 8, 8, 8, 8, 8,   // 45 - '-'
+  6, 0, 8, 8, 8, 8, 8,   // 45 - '-'
   2, 96, 96,    // 46 - '.'
   5, 32, 16, 8, 4, 2,   // 47 - '/'
   6, 0, 126, 129, 129, 129, 126,    // 48 - '0'
@@ -178,9 +177,14 @@ void loop() {
   arr[k]=0;
 
 
-   
+ 
   attachInterrupt(digitalPinToInterrupt(serial_in), isr, CHANGE);
-  while(toggle==0);
+  while(toggle==0)
+  {
+    
+     
+  
+  }
   detachInterrupt(digitalPinToInterrupt(serial_in));
   
 
@@ -212,9 +216,18 @@ void loop() {
   char charbuf[10];
   current_time.toCharArray(charbuf,10);
   
-  P.displayText(charbuf, PA_RIGHT, 0, 0, PA_PRINT, PA_NO_EFFECT);
+  P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
  P.displayAnimate();
-  while(digitalRead(serial_in)==0);
+
+  long test=millis();
+  while(digitalRead(serial_in)==0)
+  {
+    if(millis()-test>90)
+    {
+      P.displayText("-:--.--", PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+       P.displayAnimate();
+    }
+  }
 }
 
 void isr()
