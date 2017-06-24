@@ -1,6 +1,7 @@
 ---
 title: ledmat Documentation
 ---
+<link rel="shortcut icon" href="favicon.ico"/>
 
 First assemble the hardware according to the schematics. A full tutorial will be up shortly. Instructions given below are for the software only.
 
