@@ -7,17 +7,19 @@ This page contains an in-depth explanation of the components needed, the schemat
 
 ## Introduction
 
-The goal of this project is to create a device that replicates the functions of a Speedstacks Tournament Display, which retails for about $95 in the US (https://www.speedstacks.com/store/retail/speed-stacks-tournament-display-pro/). 
+The goal of this project is to create a device that replicates the functions of a Speedstacks Tournament Display, which [retails for about $95 in the US](https://www.speedstacks.com/store/retail/speed-stacks-tournament-display-pro/). 
 
 This has a 6 digit 7-segment display panel, and plugs into a stackmat timer via a standard audio jack. The stackmat outputs whatever time is on its display through a series of digital pulses. These pulses are received by the display and processed to convert them back to regular integers. Finally the time is displayed on the large 7-segment panel. 
 
 ## The data transmission protocol
 
-Since I did not discover this on my own, I’m just going to link a couple of sources. The first is ‘Selfmade Stackmat Display’ by German programmer Florian Weingarten back in 2008. It was something very similar to what we are doing in this tutorial, except he used discrete components and a custom PCB, which means it would be very hard to make for anyone who is not familiar with electronics. It was encased in a box with a 7-segment display panel and buttons to save times and display averages. You can see what it looked like here: https://www.youtube.com/watch?v=Fj_J42mBATY.
+Since I did not discover this on my own, I’m just going to link a couple of sources. The first is ‘Selfmade Stackmat Display’ by German programmer Florian Weingarten back in 2008. It was something very similar to what we are doing in this tutorial, except he used discrete components and a custom PCB, which means it would be very hard to make for anyone who is not familiar with electronics. It was encased in a box with a 7-segment display panel and buttons to save times and display averages. You can [see what it looked like here.](https://www.youtube.com/watch?v=Fj_J42mBATY)
 
-Unfortunately, the tutorial he posted has long been taken down. We can only access the text using web.archive.org. Scroll down to the ‘How it works’ section for an explanation of the protocol. http://web.archive.org/web/20100820185842/http://hackvalue.de:80/hv_atmel_stackmat
+Unfortunately, the tutorial he posted has long been taken down. We can only access the text using a web cache. Scroll down to the ‘How it works’ section for an explanation of the protocol. [http://web.archive.org/web/20100820185842/http://hackvalue.de:80/hv_atmel_stackmat](http://web.archive.org/web/20100820185842/http://hackvalue.de:80/hv_atmel_stackmat)
 
-The second source is reddit user /u/freundTech. He made a project to control TwistyTimer from a G4 stackmat. Here is his comment with an excellent explanation of the protocol:
+The second source is reddit user [/u/freundTech](https://www.reddit.com/u/freundtech). He made a project to control TwistyTimer from a G4 stackmat. Here is his comment with an excellent explanation of the protocol:
+<div class="reddit-embed" data-embed-media="www.redditmedia.com" data-embed-parent="false" data-embed-live="false" data-embed-uuid="4444636c-5b2b-4f6e-8a48-3f5bc6cc87bc" data-embed-created="2017-06-24T08:39:49.846Z"><a href="https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/dg19s4y/">Comment</a> from discussion <a href="https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/">[WIP] Stackmat timer support for TwistyTimer app</a>.</div>
+
 https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/dg19s4y/
 
 ## History of stackmat timer hacks
