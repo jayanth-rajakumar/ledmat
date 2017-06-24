@@ -1,7 +1,10 @@
 ---
 title: ledmat Documentation
 ---
-
+<head>
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+jkl
 First assemble the hardware according to the schematics. A full tutorial will be up shortly. Instructions given below are for the software only.
 
 1. Install the [Arduino IDE](https://www.arduino.cc/en/main/software).
