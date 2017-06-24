@@ -20,21 +20,19 @@ Unfortunately, the tutorial he posted has long been taken down. We can only acce
 The second source is reddit user [/u/freundTech](https://www.reddit.com/u/freundtech). He made a project to control TwistyTimer from a G4 stackmat. Here is his comment with an excellent explanation of the protocol:
 <div class="reddit-embed" data-embed-media="www.redditmedia.com" data-embed-parent="false" data-embed-live="false" data-embed-uuid="4444636c-5b2b-4f6e-8a48-3f5bc6cc87bc" data-embed-created="2017-06-24T08:39:49.846Z"><a href="https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/dg19s4y/">Comment</a> from discussion <a href="https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/">[WIP] Stackmat timer support for TwistyTimer app</a>.</div><script async src="https://www.redditstatic.com/comment-embed.js"></script>
 
-https://www.reddit.com/r/Cubers/comments/64czya/wip_stackmat_timer_support_for_twistytimer_app/dg19s4y/
-
 ## History of stackmat timer hacks
 
 The earliest one I could find was the display by Florian that I described in the previous section. 
-In 2014, Jeremy Fleischman (creator of TNoodle, the official WCA scrambling software) posted this on his website: https://www.jflei.com/2014/08/21/dialup-stackmat/.
+In 2014, Jeremy Fleischman (creator of TNoodle, the official WCA scrambling software) posted this on his website: [Dialup Stackmat](https://www.jflei.com/2014/08/21/dialup-stackmat/)
 
 It’s a really well written article that describes his progress in making a stackmat connect directly to a phone. He discovered that different phones filter the incoming audio signal very differently, and so getting a software based solution that works on all phones is near impossible. He was forced to make a custom PCB to shift the signal to frequencies that phones do not filter. While this is a great solution, it requires him to mass produce and ship those boards himself, in order to keep cost per unit low. 
 
-The speedsolving forums thread https://www.speedsolving.com/forum/threads/of-stackmats-and-smartphones.49357/ where Jeremy posted about his project has a couple of replies from people who have successfully connected stackmats to their phones.
+The [speedsolving forums thread](https://www.speedsolving.com/forum/threads/of-stackmats-and-smartphones.49357) where Jeremy posted about his project has a couple of replies from people who have successfully connected stackmats to their phones.
 
-In 2015, CubeWizard23 and his brother made and sold a 7-segment display based stackmat display for $37.50. https://www.speedsolving.com/forum/threads/homemade-stackmat-tournament-display-prototype.55493.
+In 2015, CubeWizard23 and his brother made and sold a [7-segment display based stackmat display for $37.50.](https://www.speedsolving.com/forum/threads/homemade-stackmat-tournament-display-prototype.55493)
 They seem to have used an Arduino and a MAX232 chip to decode the stackmat data. It was a very robust design with a hard plastic case and tripod socket. They have not released any significant information about how they put their project together.
 
-More recently, reddit user /u/freundTech used a new feature in Android 7.0 that allows unprocessed audio input to directly connect a stackmat with his customised version of Twisty Timer. Like the previous one, this solution too is device specific, and getting it to work on other android phones is a hit or miss.
+More recently, reddit user [/u/freundTech](https://www.reddit.com/u/freundtech) used a new feature in Android 7.0 that allows unprocessed audio input to directly connect a stackmat with his customised version of Twisty Timer. Like the previous one, this solution too is device specific, and getting it to work on other android phones is a hit or miss.
 
 ## Making a display:  7-segment LEDs or LED Matrix?
 
@@ -60,20 +58,25 @@ The best place to buy components is from China, using a site like Aliexpress.com
 
 I’ll provide the cheapest links I can find. Be aware that there is always the risk of the getting the wrong product, or having the product lost in shipment. If that happens, you will have to contact the seller for a refund and try another seller. 
 
-An Arduino Nano board. $2.66
-https://www.aliexpress.com/item/Nano-3-0-controller-compatible-with-arduino-nano-CH340-USB-driver-with-CABLE-NANO-V3-0/32686415387.html
+An Arduino Nano board. **$2.66**
 
-Single 8x8 MAX7219 LED matrix. $1.26
-https://www.aliexpress.com/item/MAX7219-dot-matrix-module-microcontroller-module-display-module-finished-goods/32667776876.html
+>[https://www.aliexpress.com/item/Nano-3-0-controller-compatible-with-arduino-nano-CH340-USB-driver-with-CABLE-NANO-V3-0/32686415387.html](https://www.aliexpress.com/item/Nano-3-0-controller-compatible-with-arduino-nano-CH340-USB-driver-with-CABLE-NANO-V3-0/32686415387.html)
 
-4-in-1 MAX7219 LED Matrix. $3.83
-https://www.aliexpress.com/item/MAX7219-Dot-Matrix-Module-For-Arduino-Microcontroller-4-In-One-Display-with-5P-Line/32616226423.html
+Single 8x8 MAX7219 LED matrix. **$1.26**
 
-2.5mm to 3.5mm, male to male audio cable. $0.97
-https://www.aliexpress.com/item/1pcs-Replacement-Audio-Cable-2-5mm-to-3-5mm-jack-Cord-Male-to-Male-For-Bose/32811868565.html
+>[https://www.aliexpress.com/item/MAX7219-dot-matrix-module-microcontroller-module-display-module-finished-goods/32667776876.html](https://www.aliexpress.com/item/MAX7219-dot-matrix-module-microcontroller-module-display-module-finished-goods/32667776876.html)
 
-Female 3.5mm audio jack. $0.93
-https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html
+4-in-1 MAX7219 LED Matrix. **$3.83**
+
+>[https://www.aliexpress.com/item/MAX7219-Dot-Matrix-Module-For-Arduino-Microcontroller-4-In-One-Display-with-5P-Line/32616226423.html](https://www.aliexpress.com/item/MAX7219-Dot-Matrix-Module-For-Arduino-Microcontroller-4-In-One-Display-with-5P-Line/32616226423.html)
+
+2.5mm to 3.5mm, male to male audio cable. **$0.97**
+
+>[https://www.aliexpress.com/item/1pcs-Replacement-Audio-Cable-2-5mm-to-3-5mm-jack-Cord-Male-to-Male-For-Bose/32811868565.html](https://www.aliexpress.com/item/1pcs-Replacement-Audio-Cable-2-5mm-to-3-5mm-jack-Cord-Male-to-Male-For-Bose/32811868565.html)
+
+Female 3.5mm audio jack. **$0.93**
+
+>[https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html](https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html)
 
 Some single strand wire. ~$0
 
@@ -83,7 +86,7 @@ Some other tools and components you might require are.
 1.	Soldering rod, lead and flux.
 2.	Wire cutter and stripper
 3.	A box to build the display in. I used an empty Pringles can.
-4.	A tripod, if your box is small and you need to get it off the ground. You can get a cheap one for about a dollar here: https://www.aliexpress.com/item/New-Black-Mini-Tripod-Mount-Holder-for-Mobius-Action-Cam-Car-Key-Camera-High-Quality-Brand/32802953047.html
+4.	A tripod, if your box is small and you need to get it off the ground. You can get a cheap one for about a dollar [here](https://www.aliexpress.com/item/New-Black-Mini-Tripod-Mount-Holder-for-Mobius-Action-Cam-Car-Key-Camera-High-Quality-Brand/32802953047.html).
 5.	Hot glue gun
 6.	Insulation tape
 
