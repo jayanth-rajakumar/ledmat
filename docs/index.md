@@ -1,3 +1,6 @@
+---
+title: ledmat Documentation
+---
 
 First assemble the hardware according to the schematics. A full tutorial will be up shortly. Instructions given below are for the software only.
 
