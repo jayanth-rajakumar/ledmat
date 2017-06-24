@@ -1,5 +1,3 @@
-# ledmat
-Arduino-based project to make a tournament display for speedcubing and speedstacking that is compatible with all major timers. Uses MAX7219 driven LED matrices as the display.
 
 First assemble the hardware according to the schematics. A full tutorial will be up shortly. Instructions given below are for the software only.
 
