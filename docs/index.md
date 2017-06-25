@@ -40,7 +40,8 @@ So far, we can see that 7-segment LEDs are the main choice for people making sta
 
 No microcontroller supports so many outputs, so we have to use a chip called the MAX7219 that takes up the task of driving up to 8 7-segment digits. Since even this chip does not have a lot of pins, it achieves the required functionality by multiplexing – i.e. turning on a digit, holding it for a few microseconds, turning it off and moving on to the next digit. This gives the impression of all the digits being on when viewed by the human eye. We can, infact achieve the same functionality from the microcontroller, but that will waste valuable processor time that is needed to accurately capture the incoming stackmat signal.
 
-This is the approach taken by the others who have done this project. The wiring diagram would look something link this: http://www.batronix.com/images/graphics/circuits/exp-led2-sch.gif
+This is the approach taken by the others who have done this project. The wiring diagram would look something link this:
+![Circuit](http://www.batronix.com/images/graphics/circuits/exp-led2-sch.gif)
 
 Since this is quite an extensive wiring task, a simpler option would be to use preassembled MAX7219-LED boards. Such boards are in fact available for quite a low price (~$1). The main pitfall is that these are only available in tiny sizes, usually with 0.5” high digits. The resulting stackmat display would not be very clearly visible from more than a few feet away in a competition setting.
 
