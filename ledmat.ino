@@ -320,12 +320,12 @@ void loop() {
     }
   }
   detachInterrupt(digitalPinToInterrupt(serial_in));
-  
+  /*
   for(int k=0;k<90;k++)
   {
     Serial.print(String(arr[k])+",");
   }
-  
+  */ 
   pulse=1;packet="";current_time="";
   for(int k=1;arr[k]!=0;k++)
   {
@@ -335,7 +335,7 @@ void loop() {
     }
     pulse=!pulse;
   }
-    Serial.print(packet); 
+    //Serial.print(packet); 
  for(int k=1;k<=5;k++)
  getbytes(packet.substring(k*10+1,(k+1)*10-1));
  current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
