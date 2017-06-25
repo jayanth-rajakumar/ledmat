@@ -13,7 +13,11 @@ This has a 6 digit 7-segment display panel, and plugs into a stackmat timer via 
 
 ## The data transmission protocol
 
-Since I did not discover this on my own, I’m just going to link a couple of sources. The first is ‘Selfmade Stackmat Display’ by German programmer Florian Weingarten back in 2008. It was something very similar to what we are doing in this tutorial, except he used discrete components and a custom PCB, which means it would be very hard to make for anyone who is not familiar with electronics. It was encased in a box with a 7-segment display panel and buttons to save times and display averages. You can [see what it looked like here.](https://www.youtube.com/watch?v=Fj_J42mBATY)
+![raw data](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/rawpacket.PNG)
+
+This is what the audio signal output by the stackmat looks like, when it is at 0:00:00. It was recorded with audacity from a computer through the audio jack.
+
+Since I did not discover this on my own, I’m just going to link a couple of sources that explain the serial protocol. The first is from the ‘Selfmade Stackmat Display’ by German programmer Florian Weingarten back in 2008. It was something very similar to what I did, except he used discrete components and a custom PCB, which means it would be very hard to make for anyone who is not familiar with electronics. It was encased in a box with a 7-segment display panel and buttons to save times and display averages. You can [see what it looked like here.](https://www.youtube.com/watch?v=Fj_J42mBATY)
 
 Unfortunately, the tutorial he posted has long been taken down. We can only access the text using a web cache. Scroll down to the ‘How it works’ section for an explanation of the protocol. [http://web.archive.org/web/20100820185842/http://hackvalue.de:80/hv_atmel_stackmat](http://web.archive.org/web/20100820185842/http://hackvalue.de:80/hv_atmel_stackmat)
 
@@ -50,6 +54,8 @@ This leaves us with the final option: preassembled MAX7219 Dot-matrix LED boards
 They are available in individual 8x8 pixel units, or as chains of four such units. We will use one 4-in-1 unit and one single unit cascaded together.
 
 ## Block diagram
+![block diagram](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/blockdiagram.png)
+
 
 This figure shows the overall big picture of what we are trying to achieve. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose.
 
@@ -79,9 +85,13 @@ Female 3.5mm audio jack. **$0.93**
 
 >[https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html](https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html)
 
+>Female to female jumper wire. **$0.59**
+
+>[https://www.aliexpress.com/item/40pcs-lot-10cm-2-54mm-1pin-Female-to-Female-jumper-wire-Dupont-cable/32566040941.html](https://www.aliexpress.com/item/40pcs-lot-10cm-2-54mm-1pin-Female-to-Female-jumper-wire-Dupont-cable/32566040941.html)
+
 Some single strand wire. ~$0
 
-This covers all the core components needed for the project, totalling up to just under $10.
+This covers all the core components needed for the project, totalling up to just over $10.
 
 Some other tools and components you might require are.
 1.	Soldering rod, lead and flux.
