@@ -2,6 +2,9 @@
 title: ledmat Documentation
 favicon: "favicon.ico"
 ---
+
+![cover photo](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/coverphoto.jpg)
+
 This page contains an in-depth explanation of the components needed, the schematics and how it all works. The assembly video linked below shows only how to put everything together. I recommend that you go through both before attempting to build this project. 
 
 
