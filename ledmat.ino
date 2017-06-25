@@ -285,7 +285,7 @@ int twopwr(int);
 void setup()
 {
  P.begin();
-  P.setIntensity(8);
+  P.setIntensity(0);
   P.setFont(xantofont);
 
  
@@ -308,26 +308,23 @@ void loop() {
   i=0,toggle=0;
   for(int k=0;k<90;k++)
   arr[k]=0;
-
-
- 
+  long test_=millis();
+  
   attachInterrupt(digitalPinToInterrupt(serial_in), isr, CHANGE);
   while(toggle==0)
   {
-    
-     
-  
+    if(millis()-test_>90)
+    {
+      P.displayText("-:--.--", PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+       P.displayAnimate();
+    }
   }
   detachInterrupt(digitalPinToInterrupt(serial_in));
   
-
-
   for(int k=0;k<90;k++)
   {
     Serial.print(String(arr[k])+",");
   }
-
-
   
   pulse=1;packet="";current_time="";
   for(int k=1;arr[k]!=0;k++)
@@ -338,20 +335,19 @@ void loop() {
     }
     pulse=!pulse;
   }
-  
-  
-    
-  for(int k=1;k<=5;k++)
+    Serial.print(packet); 
+ for(int k=1;k<=5;k++)
  getbytes(packet.substring(k*10+1,(k+1)*10-1));
  current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
-   
   
   char charbuf[10];
   current_time.toCharArray(charbuf,10);
-  
-  P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
- P.displayAnimate();
 
+  if(isDigit(charbuf[0]) and isDigit(charbuf[6])){
+  P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+  P.displayAnimate();
+  }
+  
   long test=millis();
   while(digitalRead(serial_in)==0)
   {
@@ -361,6 +357,7 @@ void loop() {
        P.displayAnimate();
     }
   }
+  
 }
 
 void isr()
