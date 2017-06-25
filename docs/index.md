@@ -40,6 +40,8 @@ More recently, reddit user [/u/freundTech](https://www.reddit.com/u/freundtech) 
 
 ## Making a display:  7-segment LEDs or LED Matrix?
 
+![raw data](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/max7219.jpg)
+
 So far, we can see that 7-segment LEDs are the main choice for people making stackmat displays. This is because they are available in a wide variety of sizes and colors. However, each digit has 10 pins, therefore a total of 50 pins would need to be connected for a 5 digit display. 
 
 No microcontroller supports so many outputs, so we have to use a chip called the MAX7219 that takes up the task of driving up to 8 7-segment digits. Since even this chip does not have a lot of pins, it achieves the required functionality by multiplexing – i.e. turning on a digit, holding it for a few microseconds, turning it off and moving on to the next digit. This gives the impression of all the digits being on when viewed by the human eye. We can, infact achieve the same functionality from the microcontroller, but that will waste valuable processor time that is needed to accurately capture the incoming stackmat signal.
@@ -57,7 +59,7 @@ They are available in individual 8x8 pixel units, or as chains of four such unit
 ![block diagram](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/blockdiagram.png)
 
 
-This figure shows the overall big picture of what we are trying to achieve. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose.
+This figure shows the overall big picture of what we are trying to build. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose.
 
 ## What you need and where to get them
 
