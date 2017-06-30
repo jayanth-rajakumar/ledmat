@@ -275,7 +275,7 @@ long temp;
 bool begin_=1;
 volatile long duration=0,m1,m2;
 volatile int i=0,arr[90],toggle=0;
-String packet="",current_time="";
+String packet="",current_time="",packet_="";
 
 void getbytes(String strbyte);
 int twopwr(int);
@@ -335,19 +335,64 @@ void loop() {
     }
     pulse=!pulse;
   }
-    //Serial.print(packet); 
+    
  for(int k=1;k<=5;k++)
  getbytes(packet.substring(k*10+1,(k+1)*10-1));
+
  current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
   
   char charbuf[10];
   current_time.toCharArray(charbuf,10);
 
-  if(isDigit(charbuf[0]) and isDigit(charbuf[6])){
-  P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
-  P.displayAnimate();
+  if(isDigit(charbuf[0]) and isDigit(charbuf[6]))
+  {
+    P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+    P.displayAnimate(); 
   }
-  
+  else
+  {
+   //Temporary hack to fill in skipped bits on G4 Pro timer. TODO: Implement packet detection alg from scratch using staggered sampling and remove this section.
+   
+    packet_=packet.substring(0,18) + "0" + packet.substring(18,38) + "1" + packet.substring(38,48)+"0"+ packet.substring(48);
+
+    current_time="";
+   
+    for(int k=1;k<=5;k++)
+    getbytes(packet_.substring(k*10+1,(k+1)*10-1));
+
+    current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
+    
+    char charbuf2[10];  
+    current_time.toCharArray(charbuf2,10);
+   
+    if(charbuf2[6]=='`')
+      charbuf2[6]='0';
+   
+    if(isDigit(charbuf2[0]) and isDigit(charbuf2[6]))
+    {
+       P.displayText(charbuf2, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+       P.displayAnimate();
+    }
+   
+  }
+
+  //Read pot and adjust brightness
+  {
+      int pot=analogRead(A0);   
+      if(pot<100)
+         P.setIntensity(0);
+      else if(pot>150 and pot<250)
+         P.setIntensity(3);
+      else if(pot>300 and pot<400)
+         P.setIntensity(6);
+      else if(pot>450 and pot<550)
+         P.setIntensity(9);
+      else if(pot>600 and pot<700)
+         P.setIntensity(12);
+      else if(pot>750 and pot<850)
+         P.setIntensity(15);
+    
+  }
   long test=millis();
   while(digitalRead(serial_in)==0)
   {
@@ -375,7 +420,7 @@ void isr()
     if(i>5 and round((float)arr[i]/750)==4 and round((float)arr[i-1]/750)==2 and round((float)arr[i-2]/750)==1 and round((float)arr[i-3]/750)==1 and round((float)arr[i-4]/750)==1 and round((float)arr[i-5]/750)==1)
    {
     
-    Serial.println();
+   // Serial.println();
     m2=micros();
     toggle=1;
     return;
