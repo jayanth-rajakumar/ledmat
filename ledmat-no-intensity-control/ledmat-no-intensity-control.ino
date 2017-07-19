@@ -309,8 +309,7 @@ void loop() {
   for(int k=0;k<90;k++)
   arr[k]=0;
   long test_=millis();
-
-  /*
+  
   attachInterrupt(digitalPinToInterrupt(serial_in), isr, CHANGE);
   while(toggle==0)
   {
@@ -321,38 +320,13 @@ void loop() {
     }
   }
   detachInterrupt(digitalPinToInterrupt(serial_in));
-  */
-
-  delayMicroseconds(416);
-  
-            
-            for(int lx=0;lx<30;lx++)
-            {
-              arr[lx]=digitalRead(serial_in);    
-              delayMicroseconds(810);
-            }
-            
-            arr[30]=digitalRead(serial_in);           
-            delayMicroseconds(810);
-            
-            for(int lx=31;lx<90;lx++)
-            {
-              arr[lx]=digitalRead(serial_in);    
-              delayMicroseconds(810);
-            }
-            
-            
-            
-            
+  /*
   for(int k=0;k<90;k++)
   {
-   Serial.print(String(arr[k]));
+    Serial.print(String(arr[k])+",");
   }
-  
-  
-  Serial.print("\n");
+  */ 
   pulse=1;packet="";current_time="";
-  /*
   for(int k=1;arr[k]!=0;k++)
   {
     for(int j=0;j<round((float)arr[k]/828);j++)
@@ -361,17 +335,7 @@ void loop() {
     }
     pulse=!pulse;
   }
-  */
-  packet="";
-  for(int k=0;k<90;k++)
-  {
-    if(arr[k]==0){
-      packet+="1";
-    }
-    else
-    packet+="0";
-    }
-  //  Serial.println(packet);
+    
  for(int k=1;k<=5;k++)
  getbytes(packet.substring(k*10+1,(k+1)*10-1));
 
@@ -380,24 +344,35 @@ void loop() {
   char charbuf[10];
   current_time.toCharArray(charbuf,10);
 
-  if(isDigit(charbuf[0]) and isDigit(charbuf[6]) and isDigit(charbuf[2]) and isDigit(charbuf[3]) and isDigit(charbuf[5]))
+  if(isDigit(charbuf[0]) and isDigit(charbuf[6]))
   {
     P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
     P.displayAnimate(); 
   }
   else
   {
-   //Hack to resolve last seconds on QJ Timer. TODO: Improve timing of digitalRead to fix this
+   //Temporary hack to fill in skipped bits on G4 Pro timer. TODO: Implement packet detection alg from scratch using staggered sampling and remove this section.
+   
+    packet_=packet.substring(0,18) + "0" + packet.substring(18,38) + "1" + packet.substring(38,48)+"0"+ packet.substring(48);
 
-   charbuf[5]=qj_fix(charbuf[5]);
-   charbuf[6]=qj_fix(charbuf[6]);
+    current_time="";
+   
+    for(int k=1;k<=5;k++)
+    getbytes(packet_.substring(k*10+1,(k+1)*10-1));
 
-        if(isDigit(charbuf[0]) and isDigit(charbuf[6]) and isDigit(charbuf[2]) and isDigit(charbuf[3]) and isDigit(charbuf[5]))
-        {
-          P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
-          P.displayAnimate(); 
-        }
+    current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
     
+    char charbuf2[10];  
+    current_time.toCharArray(charbuf2,10);
+   
+    if(charbuf2[6]=='`')
+      charbuf2[6]='0';
+   
+    if(isDigit(charbuf2[0]) and isDigit(charbuf2[6]))
+    {
+       P.displayText(charbuf2, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
+       P.displayAnimate();
+    }
    
   }
 
@@ -486,51 +461,4 @@ int twopwr(int a)
   return out;
 }
 
-char qj_fix(char ch)
-{
-  switch(ch)
-  {
-    case '`':
-    return '0';
-    break;
-
-    case 'b':
-    return '1';
-    break;
-
-    case 'd':
-    return '2';
-    break;
-
-    case 'f':
-    return '3';
-    break;
-
-    case 'h':
-    return '4';
-    break;
-
-    case 'j':
-    return '5';
-    break;
-
-    case 'l':
-    return '6';
-    break;
-
-    case 'n':
-    return '7';
-    break;
-
-    case 'p':
-    return '8';
-    break;
-
-    case 'r':
-    return '9';
-    break;
-
-    
-  }
-}
 
