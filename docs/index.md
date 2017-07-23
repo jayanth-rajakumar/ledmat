@@ -20,6 +20,7 @@ Here is a video showcasing the features of the final product:
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/PdUpv4ycwWA/0.jpg)](http://www.youtube.com/watch?v=PdUpv4ycwWA "Video Title")
 
+Click [here](#abcd) to skip the technical stuff and go straight to the instructions.
 
 ## The data transmission protocol
 
@@ -50,6 +51,25 @@ More recently, reddit user [/u/freundTech](https://www.reddit.com/u/freundtech) 
 
 I'll return to the issue of phone-stackmat linking at the very end of this page.
 
+## Voltage level of stackmat timers
+
+From Florian's article:
+
+>The "stackmat signal" is essentially just a RS232 serial signal (1200 baud, 8 databits, no parity bits, one stop bit). This signal is converted to TTL level (5V/0V) by the MAX232 level shifter IC, so the Atmel microprocessor can understand it.
+
+He is saying that we need an IC called MAX232 to transform the signal coming from the stackmat in order for the Arduino to be able to understand it. Since I did not have any experience with using this IC, I decided to take a look at the signal and see if there was some other way to process it, perhaps by simply amplifying it. 
+
+Not having access to an oscilloscope at the time, I simply gave the stackmat to an Arduino's analog pin and serially printed the readings and hoped that it wouldn't destroy the Arduino (because proper RS232 actually goes up to 15V, which would pretty much fry the board). To my surprise, the output looked perfectly like it was supposed to.
+
+It turns out that stackmat simply uses a voltage level of 0 to 3 volts, as suggested by the 2 x 1.5V AAA batteries it runs on. According the electrical characteristics of the Atmega328 (the microcontroller the Arduino is based around), the minimum an input voltage must be to considered a logical high (i.e. the V<sub>IH_min</sub>) is 0.6 times the VCC. For a VCC of 5-5.2V (which we can get from a computer's USB port), this gives a V<sub>IH_min</sub> of slightly above 3V, which is exactly what the stackmat is giving out! 
+
+Admittedly, the voltage is quite close to the edge, and there might be some issues when the stackmat batteries run low. But I have not had any problems yet.
+
+ In conclusion, there is no need for any voltage level shifter, and this makes the project much simpler to build.
+
+I later confirmed this with an oscilloscope:
+![oscilloscope](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/oscilloscope.jpg)
+
 ## Making a display:  7-segment LEDs or LED Matrix?
 
 ![raw data](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/max7219.jpg)
@@ -67,30 +87,16 @@ This leaves us with the final option: preassembled MAX7219 Dot-matrix LED boards
 
 They are available in individual 8x8 pixel units, or as chains of four such units. We will use one 4-in-1 unit and one single unit cascaded together.
 
-## Voltage level of stackmat timers
 
-From Florian's article:
-
->The "stackmat signal" is essentially just a RS232 serial signal (1200 baud, 8 databits, no parity bits, one stop bit). This signal is converted to TTL level (5V/0V) by the MAX232 level shifter IC, so the Atmel microprocessor can understand it.
-
-He is saying that we need an IC called MAX232 to transform the signal coming from the stackmat in order for the Arduino to be able to understand it. Since I did not have any experience with using this IC, I decided to take a look at the signal and see if there was some other way to process it, perhaps by simply amplifying it. 
-
-Not having access to an oscilloscope at the time, I simply gave the stackmat to an Arduino's analog pin and serially printed the readings and hoped that it wouldn't destroy the Arduino (because proper RS232 actually goes up to 15V, which would pretty much fry the board). To my surprise, the output looked perfectly like it was supposed to.
-
-It turns out that stackmat simply uses a voltage level of 0 to 3 volts, as suggested by the 2 x 1.5V AAA batteries it runs on. According the electrical characteristics of the Atmega328 (the microcontroller the Arduino is based around), the minimum an input voltage must be to considered a logical high (i.e. the V<sub>IH_min</sub>) is 0.6 times the VCC. For a VCC of 5-5.2V (which we can get from a computer's USB port), this gives a V<sub>IH_min</sub> of slightly above 3V, which is exactly what the stackmat is giving out! 
-
-Admittedly, the voltage is quite close to the edge, and there might be some issues when the stackmat batteries run low. But I have not had any problems yet.
-
- In conclusion, there is no need for any voltage level shifter, and this makes the project much simpler to build.
-
-I later confirmed this on an oscilloscope:
-![oscilloscope](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/oscilloscope.jpg)
-
-## Block diagram
+## Block diagram <a name="abcd"></a>
 ![block diagram](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/blockdiagram.png)
 
 
-This figure shows the overall big picture of what we are trying to build. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose. Alternatively, we can use a discrete Lithium-ion battery with some supporting circuitry.
+This figure shows the overall big picture of what we are trying to build. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. 
+
+A potentiometer allows the brightness of the display to be changed by turning a knob.
+
+Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose. Alternatively, we can use a discrete Lithium-ion battery with some supporting circuitry.
 
 ## What you need and where to get it
 
@@ -148,27 +154,40 @@ Some other tools and components you might require are.
 ## Video tutorial: complete assembly instructions
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/cA9uER2RvyI/0.jpg)](http://www.youtube.com/watch?v=cA9uER2RvyI "Video Title")
 
+  
+## Setting up the software environment
+
+1. Install the [Arduino IDE](https://www.arduino.cc/en/main/software).
+2. Download the libraries [MD_Parola](https://github.com/MajicDesigns/MD_Parola) and [MD_MAX2XX](https://github.com/MajicDesigns/MD_MAX72XX) using 'Clone or download' -> 'Download ZIP'.
+3. Extract the ZIPs to get two folders called MD_Parola-master and MD_MAX72XX-master. 
+4. Move these folders to the Documents\Arduino\Libraries folder (On Windows only. more info on library installation can be found [here](https://www.arduino.cc/en/guide/libraries))
+5. Open MD_MAX72XX-master\src\MD_MAX72XX.h. If it does not display well in notepad, try wordpad.
+6. Search for USE_PAROLA_HW and replace the 1 next to it with a 0. Search for your hardware (usually USE_FC16_HW, see the full tutorial for more information) and replace the 0 next to it with a 1. Save the file and close it.
+7. Download this repository and extract the ledmat.ino file. Open it, set the board to Arduino Nano in the Tools menu. Also make sure the correct Port is selected.
+8. Upload the sketch, plug in the stackmat and enjoy!
+
+
 ## Making a portable power supply unit
 
 You will need:
 
-TP4056 Li-ion battery charger module **$2.33**
+1. TP4056 Li-ion battery charger module **$2.33**
 
 >[https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html](https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html)
 
-Li-ion battery **???**
+2. Li-ion battery **$???**
 
 I got a 1400 mAh battery for about $2 at my local electronics store. I can't seem to find any good listings on AliExpress, and there's also a high chance of it being stopped at Customs (explosion risk and all that). 
 
 So just find a decent li-ion or li-po battery that is rated at 3.7 V on eBay or Amazon. Anything over 500 mAh should be good enough. Make sure the battery already has two terminal wires soldered, as doing it yourself can be hard, not to mention dangerous.
 
-On/Off Switch **$1.59 (100pcs)**
+3. On/Off Switch **$1.59 (100pcs)**
 
 Probably way cheaper to buy this locally. You only need one.
 
 >[https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html](https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html)
 
-5V Step-up module **$1.40/$1.69**
+4. 5V Step-up module **$1.40/$1.69**
 
 >[https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html](https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html)
 
@@ -190,6 +209,10 @@ The Arduino should now turn on when you toggle the switch.
   
 ## Fitting the project into an enclosure
 
+[![IMAGE ALT TEXT](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama_small.jpg)](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama.jpg)
+
+Click on the above image to see the full sized version.
+
 I used a 4"x7"x2" plastic enclosure I got at a local electronics store. It came with 4 screws to secure the front in place.
 
 First I glued the single and 4-in-1 LED matrix units together using hot glue. Next I  placed the now 5-in-1 unit on the front of the box and marked the places where the screw holes are. I used only 3 screws, as far away from each other as possible. I made holes for the screws in the front of the box using a heated soldering rod. I also had to make holes to allow the pins protruding from the back to sit inside the case. Then I removed the LED panels from it's PCB, screwed the boards into the box, and put the panels back. The incoming 5 jumper wires needed a small indentation in the side of the box to not prevent the box from closing.
@@ -197,21 +220,6 @@ First I glued the single and 4-in-1 LED matrix units together using hot glue. Ne
 I hot glued the battery to the inner back wall of the box, and stuck the charger and step-up modules on the battery using double sided-tape. Next, I hot glued the arduino down, taking care to allow enough around its USB port. This is necessary if the code ever needs to be changed.
 
 Using a soldering rod, I made holes on the bottom for the tripod and audio jack. This can be a bit tricky because if the hole gets too big, it's basically useless. Similarly, I made holes for the switch, potentiometer and an OTG cable that I connected to the TP4056 charger module. I secured these components using epoxy, to prevent them from coming loose due to wear and tear.
-             
-Click on the below image to see the full sized version.
-[![IMAGE ALT TEXT](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama_small.jpg)](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama.jpg)
-
-## Setting up the software environment
-
-1. Install the [Arduino IDE](https://www.arduino.cc/en/main/software).
-2. Download the libraries [MD_Parola](https://github.com/MajicDesigns/MD_Parola) and [MD_MAX2XX](https://github.com/MajicDesigns/MD_MAX72XX) using 'Clone or download' -> 'Download ZIP'.
-3. Extract the ZIPs to get two folders called MD_Parola-master and MD_MAX72XX-master. 
-4. Move these folders to the Documents\Arduino\Libraries folder (On Windows only. more info on library installation can be found [here](https://www.arduino.cc/en/guide/libraries))
-5. Open MD_MAX72XX-master\src\MD_MAX72XX.h. If it does not display well in notepad, try wordpad.
-6. Search for USE_PAROLA_HW and replace the 1 next to it with a 0. Search for your hardware (usually USE_FC16_HW, see the full tutorial for more information) and replace the 0 next to it with a 1. Save the file and close it.
-7. Download this repository and extract the ledmat.ino file. Open it, set the board to Arduino Nano in the Tools menu. Also make sure the correct Port is selected.
-8. Upload the sketch, plug in the stackmat and enjoy!
-
 
 ## More stackmat projects
 
