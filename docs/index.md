@@ -87,8 +87,8 @@ This leaves us with the final option: preassembled MAX7219 Dot-matrix LED boards
 
 They are available in individual 8x8 pixel units, or as chains of four such units. We will use one 4-in-1 unit and one single unit cascaded together.
 
-
-## Block diagram <a name="abcd"></a>
+<a name="abcd"></a>
+## Block diagram 
 ![block diagram](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/blockdiagram.png)
 
 
