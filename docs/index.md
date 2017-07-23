@@ -18,7 +18,7 @@ I also want to keep the software and hardware completely open source, so that an
 
 Here is a video showcasing the features of the final product:
 
-<p style="text-align: center;">[![IMAGE ALT TEXT](http://img.youtube.com/vi/PdUpv4ycwWA/0.jpg)](http://www.youtube.com/watch?v=PdUpv4ycwWA "Video Title")</p>
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/PdUpv4ycwWA/0.jpg)](http://www.youtube.com/watch?v=PdUpv4ycwWA "Video Title")
 
 Click [here](#abcd) to skip the technical stuff and go straight to the instructions.
 
