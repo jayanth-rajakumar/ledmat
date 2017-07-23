@@ -149,6 +149,8 @@ Some other tools and components you might require are.
 
 ## Making a portable power supply unit
 
+<iframe width="560" height="315" src="http://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+
 <iframe width="420" height="315" src="http://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe> 
 
 ## Setting up the software environment
