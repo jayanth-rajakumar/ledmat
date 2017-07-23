@@ -197,8 +197,8 @@ First I glued the single and 4-in-1 LED matrix units together using hot glue. Ne
 I hot glued the battery to the inner back wall of the box, and stuck the charger and step-up modules on the battery using double sided-tape. Next, I hot glued the arduino down, taking care to allow enough around its USB port. This is necessary if the code ever needs to be changed.
 
 Using a soldering rod, I made holes on the bottom for the tripod and audio jack. This can be a bit tricky because if the hole gets too big, it's basically useless. Similarly, I made holes for the switch, potentiometer and an OTG cable that I connected to the TP4056 charger module. I secured these components using epoxy, to prevent them from coming loose due to wear and tear.
-
-![alt-text-1](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/i_top.jpg "title-1") ![alt-text-2](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/i_bottom.jpg "title-2")
+             
+![alt-text-1](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/i_top.JPG "title-1") ![alt-text-2](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/i_bottom.JPG "title-2")
 
 ## Setting up the software environment
 
