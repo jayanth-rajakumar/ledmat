@@ -146,13 +146,59 @@ Some other tools and components you might require are.
 7.	Epoxy (like m-seal) for firmly attaching buttons and knobs to the box.
 
 ## Video tutorial: complete assembly instructions
-<iframe width="560" height="420" src="http://www.youtube.com/embed/dQw4w9WgXcQ?color=white&theme=light"></iframe>cA9uER2RvyI
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/cA9uER2RvyI/0.jpg)](http://www.youtube.com/watch?v=cA9uER2RvyI "Video Title")
 
 ## Making a portable power supply unit
 
-<iframe width="425" height="349" src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0">t</iframe>
+You will need:
 
-<iframe width="560" height="420" src="http://www.youtube.com/embed/oHg5SJYRHA0?color=white&theme=light"></iframe>
+TP4056 Li-ion battery charger module **$2.33**
+
+>[https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html](https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html)
+
+Li-ion battery **???**
+
+I got a 1400 mAh battery for about $2 at my local electronics store. I can't seem to find any good listings on AliExpress, and there's also a high chance of it being stopped at Customs (explosion risk and all that). 
+
+So just find a decent li-ion or li-po battery that is rated at 3.7 V on eBay or Amazon. Anything over 500 mAh should be good enough. Make sure the battery already has two terminal wires soldered, as doing it yourself can be hard, not to mention dangerous.
+
+On/Off Switch **$1.59 (100pcs)**
+
+Probably way cheaper to buy this locally. You only need one.
+
+>[https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html](https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html)
+
+5V Step-up module **$1.40/$1.69**
+
+>[https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html](https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html)
+
+or
+
+>[https://www.aliexpress.com/item/5PCS-0-9V-5V-to-5V-600MA-USB-Output-charger-step-up-Power-Module-Mini-DC/32566334622.html](https://www.aliexpress.com/item/5PCS-0-9V-5V-to-5V-600MA-USB-Output-charger-step-up-Power-Module-Mini-DC/32566334622.html)
+
+This section definitely requires some soldering skills. You can find tutorials for that on Youtube.
+
+![cover photo](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/psu.jpg)
+
+First connect the red wire of the battery to an extreme terminal of the on/off switch. Then the middle terminal of the switch to the terminal marked B+ or BAT+ on the side of the TP4056 board without the USB port. Connect the black wire directly to B- or BAT-. Connections should be made by stripping the insulation around the end of the wire, looping the exposed end through the hole and soldering.
+
+Now connect OUT+ to VIN+ of the step up module, and OUT- to VIN-.  If the board has a USB port, you can connect a regular USB to mini-USB cable to it and plus the other end into the Arduino. If not,  then there will be two output terminals.
+
+VOUT- should connect to a GND of the Arduino or any GND on the back of the LED matrix. VOUT+ should connect to the 5V pin of the Arduino or a VCC on the back of the LED Matrix. Since we already soldered two small header pins on the back of the display, we can share those points with the potentiometer. This will require stripping the insulation at a convenient point, and soldering.
+
+The Arduino should now turn on when you toggle the switch.
+  
+## Fitting the project into an enclosure
+
+I used a 4"x7"x2" plastic enclosure I got at a local electronics store. It came with 4 screws to secure the front in place.
+
+
+[{% img left https://lh5.googleusercontent.com/-UjFXd_iX4wg/UK_LGHwB1GI/AAAAAAAACGM/Y9dOC2JLMu0/s400/2012-11-01%252010.51.22.jpg 'Power button of an electric kettle' %}](https://picasaweb.google.com/lh/photo/v54UgP-UYdQKngGBXIkVdtMTjNZETYmyPJy0liipFm0?feat=directlink)
+
+[{% img left https://lh5.googleusercontent.com/-pZWML6wLvMk/UK_NhINxrhI/AAAAAAAACHc/8dvYICW8AA8/s400/2012-11-01%252011.01.24.jpg 'Power button of an external hard drive' %}](https://picasaweb.google.com/lh/photo/F8GpZ42t2k7OnFWfgzGDW9MTjNZETYmyPJy0liipFm0?feat=directlink)
+
+[{% img left https://lh6.googleusercontent.com/-1L7v_5CYtq8/UK_NndJB_HI/AAAAAAAACHk/se84006Yoyo/s400/2012-11-01%252011.37.17.jpg 'Power button of an IKEA bedside lamp' %}](https://picasaweb.google.com/lh/photo/2O6MNRL11LHZaOWy5ucSFdMTjNZETYmyPJy0liipFm0?feat=directlink)
+
 
 ## Setting up the software environment
 
