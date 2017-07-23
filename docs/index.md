@@ -171,23 +171,23 @@ Some other tools and components you might require are.
 
 You will need:
 
-1. TP4056 Li-ion battery charger module **$2.33**
+1\. TP4056 Li-ion battery charger module **$2.33**
 
 >[https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html](https://www.aliexpress.com/item/New-2Pcs-lot-5V-1A-Micro-USB-18650-Lithium-Battery-Charging-Board-Charger-Module-Protection-Dual/32230225249.html)
 
-2. Li-ion battery **$???**
+2\. Li-ion battery **$???**
 
 I got a 1400 mAh battery for about $2 at my local electronics store. I can't seem to find any good listings on AliExpress, and there's also a high chance of it being stopped at Customs (explosion risk and all that). 
 
 So just find a decent li-ion or li-po battery that is rated at 3.7 V on eBay or Amazon. Anything over 500 mAh should be good enough. Make sure the battery already has two terminal wires soldered, as doing it yourself can be hard, not to mention dangerous.
 
-3. On/Off Switch **$1.59 (100pcs)**
+3\. On/Off Switch **$1.59 (100pcs)**
 
 Probably way cheaper to buy this locally. You only need one.
 
 >[https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html](https://www.aliexpress.com/item/100PCS-SS12D00-SS-12D00-SPDT-toggle-switch-DIP-3PIN-handle-length-4mm-1P2T-slide-switches-ROHS/32778940378.html)
 
-4. 5V Step-up module **$1.40/$1.69**
+4\. 5V Step-up module **$1.40/$1.69**
 
 >[https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html](https://www.aliexpress.com/item/DC-DC-Step-Up-Boost-Power-Supply-Module-2V-5V-to-5V-2A-Fixed-Output-High/32657498007.html)
 
