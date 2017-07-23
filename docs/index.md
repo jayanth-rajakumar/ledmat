@@ -18,7 +18,7 @@ I also want to keep the software and hardware completely open source, so that an
 
 Here is a video showcasing the features of the final product:
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/PdUpv4ycwWA/0.jpg)](http://www.youtube.com/watch?v=PdUpv4ycwWA "Video Title")
+<p style="text-align: center;">[![IMAGE ALT TEXT](http://img.youtube.com/vi/PdUpv4ycwWA/0.jpg)](http://www.youtube.com/watch?v=PdUpv4ycwWA "Video Title")</p>
 
 Click [here](#abcd) to skip the technical stuff and go straight to the instructions.
 
@@ -61,7 +61,7 @@ He is saying that we need an IC called MAX232 to transform the signal coming fro
 
 Not having access to an oscilloscope at the time, I simply gave the stackmat to an Arduino's analog pin and serially printed the readings and hoped that it wouldn't destroy the Arduino (because proper RS232 actually goes up to 15V, which would pretty much fry the board). To my surprise, the output looked perfectly like it was supposed to.
 
-It turns out that stackmat simply uses a voltage level of 0 to 3 volts, as suggested by the 2 x 1.5V AAA batteries it runs on. According the electrical characteristics of the Atmega328 (the microcontroller the Arduino is based around), the minimum an input voltage must be to considered a logical high (i.e. the V<sub>IH_min</sub>) is 0.6 times the VCC. For a VCC of 5-5.2V (which we can get from a computer's USB port), this gives a V<sub>IH_min</sub> of slightly above 3V, which is exactly what the stackmat is giving out! 
+It turns out that stackmat simply uses a voltage level of 0 to 3 volts, as suggested by the 2 x 1.5V AAA batteries it runs on. According the electrical characteristics of the Atmega328 (the microcontroller the Arduino is based around), the minimum an input voltage must be, to be considered a logical high (i.e. the V<sub>IH_min</sub>) is 0.6 times the VCC. For a VCC of 5-5.2V (which we can get from a computer's USB port), this gives a V<sub>IH_min</sub> of slightly above 3V, which is exactly what the stackmat is giving out! 
 
 Admittedly, the voltage is quite close to the edge, and there might be some issues when the stackmat batteries run low. But I have not had any problems yet.
 
