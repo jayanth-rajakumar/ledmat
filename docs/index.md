@@ -151,6 +151,7 @@ Some other tools and components you might require are.
 
 <iframe width="425" height="349" src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0">t</iframe>
 
+<iframe width="560" height="420" src="http://www.youtube.com/embed/oHg5SJYRHA0?color=white&theme=light"></iframe>
 
 ## Setting up the software environment
 
