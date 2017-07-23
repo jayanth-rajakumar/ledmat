@@ -145,13 +145,12 @@ Some other tools and components you might require are.
 7.	Epoxy (like m-seal) for firmly attaching buttons and knobs to the box.
 
 ## Video tutorial: complete assembly instructions
-<iframe width="560" height="420" src="http://www.youtube.com/embed/dQw4w9WgXcQ?color=white&theme=light">cA9uER2RvyI</iframe>
+<iframe width="560" height="420" src="http://www.youtube.com/embed/dQw4w9WgXcQ?color=white&theme=light"></iframe>cA9uER2RvyI
 
 ## Making a portable power supply unit
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="425" height="349" src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0">t</iframe>
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe> 
 
 ## Setting up the software environment
 
