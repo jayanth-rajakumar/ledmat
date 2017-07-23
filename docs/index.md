@@ -226,5 +226,3 @@ Using a soldering rod, I made holes on the bottom for the tripod and audio jack.
 From the section on the history of stackmat hacks, we can see that connecting directly to a phone has been a rather difficult task. But by introducing the Arduino in the middle, the task of interpreting the data is no longer on the phone. 
 
 We can transfer the decoded time data to the phone using a technology that will work the same no matter what the phone is: Bluetooth. The only hardware modification this will require is replacing the two LED matrix panels with a HC-05 bluetooth module. We can then modify any existing open source timer app to work with the Bluetooth module. I will have a tutorial for this linked here shortly.
-
-![Prototype](https://raw.github.com/jayanth-rajakumar/ledmat/master/img_prototype.jpg)
