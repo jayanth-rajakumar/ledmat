@@ -5,8 +5,6 @@ favicon: "favicon.ico"
 
 ![cover photo](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/coverphoto.jpg)
 
-This page contains an in-depth explanation of the components needed, the schematics and how it all works. The assembly video linked below shows only how to put everything together. I recommend that you go through both before attempting to build this project. 
-
 
 ## Introduction
 
@@ -14,11 +12,19 @@ The goal of this project is to create a device that replicates the functions of 
 
 This has a 6 digit 7-segment display panel, and plugs into a stackmat timer via a standard audio jack. The stackmat outputs whatever time is on its display through a series of digital pulses. These pulses are received by the display and processed to convert them back to regular integers. Finally the time is displayed on the large 7-segment panel. 
 
+As seen in the photo above, this project only shows 5 digits, so the thousandth digit is omitted. However, this does not prevent it from being used in competitions until WCA regulations change.
+
+I also want to keep the software and hardware completely open source, so that anyone can use it and improve upon it in the future. 
+
+Here is a video showcasing the features of the final product:
+
+<iframe width="560" height="420" src="http://www.youtube.com/embed/PdUpv4ycwWA?color=white&theme=light"></iframe>
+
 ## The data transmission protocol
 
 ![raw data](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/rawpacket.PNG)
 
-This is what the audio signal output by the stackmat looks like, when it is at 0:00:00. It was recorded with audacity from a computer through the audio jack.
+This is what the audio signal output by the stackmat looks like, when it is at 0:00:00. It was recorded with audacity from a computer through the audio jack. The timer outputs such a signal about every 0.15 seconds, giving the current state of the timer. The first task is to be able to decode this data.
 
 Since I did not discover this on my own, I’m just going to link a couple of sources that explain the serial protocol. The first is from the ‘Selfmade Stackmat Display’ by German programmer Florian Weingarten back in 2008. It was something very similar to what I did, except he used discrete components and a custom PCB, which means it would be very hard to make for anyone who is not familiar with electronics. It was encased in a box with a 7-segment display panel and buttons to save times and display averages. You can [see what it looked like here.](https://www.youtube.com/watch?v=Fj_J42mBATY)
 
@@ -41,6 +47,8 @@ They seem to have used an Arduino and a MAX232 chip to decode the stackmat data.
 
 More recently, reddit user [/u/freundTech](https://www.reddit.com/u/freundtech) used a new feature in Android 7.0 that allows unprocessed audio input to directly connect a stackmat with his customised version of Twisty Timer. Like the previous one, this solution too is device specific, and getting it to work on other android phones is a hit or miss.
 
+I'll return to the issue of phone-stackmat linking at the very end of this page.
+
 ## Making a display:  7-segment LEDs or LED Matrix?
 
 ![raw data](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/max7219.jpg)
@@ -58,15 +66,34 @@ This leaves us with the final option: preassembled MAX7219 Dot-matrix LED boards
 
 They are available in individual 8x8 pixel units, or as chains of four such units. We will use one 4-in-1 unit and one single unit cascaded together.
 
+## Voltage level of stackmat timers
+
+From Florian's article:
+
+>The "stackmat signal" is essentially just a RS232 serial signal (1200 baud, 8 databits, no parity bits, one stop bit). This signal is converted to TTL level (5V/0V) by the MAX232 level shifter IC, so the Atmel microprocessor can understand it.
+
+He is saying that we need an IC called MAX232 to transform the signal coming from the stackmat in order for the Arduino to be able to understand it. Since I did not have any experience with using this IC, I decided to take a look at the signal and see if there was some other way to process it, perhaps by simply amplifying it. 
+
+Not having access to an oscilloscope at the time, I simply gave the stackmat to an Arduino's analog pin and serially printed the readings and hoped that it wouldn't destroy the Arduino (because proper RS232 actually goes up to 15V, which would pretty much fry the board). To my surprise, the output looked perfectly like it was supposed to.
+
+It turns out that stackmat simply uses a voltage level of 0 to 3 volts, as suggested by the 2 x 1.5V AAA batteries it runs on. According the electrical characteristics of the Atmega328 (the microcontroller the Arduino is based around), the minimum an input voltage must be to considered a logical high (i.e. the V<sub>IH_min</sub>) is 0.6 times the VCC. For a VCC of 5-5.2V (which we can get from a computer's USB port), this gives a V<sub>IH_min</sub> of slightly above 3V, which is exactly what the stackmat is giving out! 
+
+Admittedly, the voltage is quite close to the edge, and there might be some issues when the stackmat batteries run low. But I have not had any problems yet.
+
+ In conclusion, there is no need for any voltage level shifter, and this makes the project much simpler to build.
+
+I later confirmed this on an oscilloscope:
+![oscilloscope](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/oscilloscope.jpg)
+
 ## Block diagram
 ![block diagram](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/blockdiagram.png)
 
 
-This figure shows the overall big picture of what we are trying to build. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose.
+This figure shows the overall big picture of what we are trying to build. We receive the signal from the stackmat’s 2.5mm jack and give it between a digital input pin and ground of an Arduino Nano microcontroller. The Arduino has a program uploaded to it which decodes the incoming data and displays it on the screen in real time. Power is supplied to the board through the Arduino’s USB port. A small powerbank can be used for this purpose. Alternatively, we can use a discrete Lithium-ion battery with some supporting circuitry.
 
-## What you need and where to get them
+## What you need and where to get it
 
-The best place to buy components is from China, using a site like Aliexpress.com. If you pick the free shipping option, it may take 1-1.5 months for it to reach you, but it is worth it since the prices are very low. Alternatively, physical stores which specialize in electronic components may also stock these items.
+The best place to buy components is from China, using a site like Aliexpress.com. If you pick the free shipping option, it may take 1-1.5 months for it to reach you, but it is worth it since the prices are very low. It's worth comparing prices at your local hobby electronics store before ordering.
 
 I’ll provide the cheapest links I can find. Be aware that there is always the risk of the getting the wrong product, or having the product lost in shipment. If that happens, you will have to contact the seller for a refund and try another seller. 
 
@@ -90,21 +117,39 @@ Female 3.5mm audio jack. **$0.93**
 
 >[https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html](https://www.aliexpress.com/item/20Pcs-3-5mm-Female-Audio-Connector-3-Pin-DIP-Headphone-Jack-Socket-PJ-301M/32704147531.html)
 
->Female to female jumper wire. **$0.59**
+Female to female jumper wire. **$0.59**
 
 >[https://www.aliexpress.com/item/40pcs-lot-10cm-2-54mm-1pin-Female-to-Female-jumper-wire-Dupont-cable/32566040941.html](https://www.aliexpress.com/item/40pcs-lot-10cm-2-54mm-1pin-Female-to-Female-jumper-wire-Dupont-cable/32566040941.html)
 
 Some single strand wire. ~$0
 
-This covers all the core components needed for the project, totalling up to just over $10.
+**Optional: for allowing adjustable brightness**
+
+Male header pins **$0.31**
+
+>[https://www.aliexpress.com/item/1PCS-40P-2-54mm-Male-Color-Single-Row-Pin-Header/32537378399.html](https://www.aliexpress.com/item/1PCS-40P-2-54mm-Male-Color-Single-Row-Pin-Header/32537378399.html)
+
+1K Potentiometer **$0.94**
+
+>[https://www.aliexpress.com/item/2Pcs-1K-Ohm-B1K-Knurled-Shaft-Linear-Rotary-Taper-Potentiometer/32640443782.html?](https://www.aliexpress.com/item/2Pcs-1K-Ohm-B1K-Knurled-Shaft-Linear-Rotary-Taper-Potentiometer/32640443782.html?)
+
+This covers all the core components needed for the project, totalling up to just over $11.
 
 Some other tools and components you might require are.
 1.	Soldering rod, lead and flux.
 2.	Wire cutter and stripper
-3.	A box to build the display in. I used an empty Pringles can.
+3.	A box to build the display in. I used a 4x7x2 inches plastic enclosure I got from a local electronics store.
 4.	A tripod, if your box is small and you need to get it off the ground. You can get a cheap one for about a dollar [here](https://www.aliexpress.com/item/New-Black-Mini-Tripod-Mount-Holder-for-Mobius-Action-Cam-Car-Key-Camera-High-Quality-Brand/32802953047.html).
 5.	Hot glue gun
 6.	Insulation tape
+7.	Epoxy (like m-seal) for firmly attaching buttons and knobs to the box.
+
+## Video tutorial: complete assembly instructions
+<iframe width="560" height="420" src="http://www.youtube.com/embed/cA9uER2RvyI?color=white&theme=light"></iframe>
+
+## Making a portable power supply unit
+
+ 
 
 ## Setting up the software environment
 
