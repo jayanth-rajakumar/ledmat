@@ -192,13 +192,13 @@ The Arduino should now turn on when you toggle the switch.
 
 I used a 4"x7"x2" plastic enclosure I got at a local electronics store. It came with 4 screws to secure the front in place.
 
+First I glued the single and 4-in-1 LED matrix units together using hot glue. Next I  placed the now 5-in-1 unit on the front of the box and marked the places where the screw holes are. I used only 3 screws, as far away from each other as possible. I made holes for the screws in the front of the box using a heated soldering rod. I also had to make holes to allow the pins protruding from the back to sit inside the case. Then I removed the LED panels from it's PCB, screwed the boards into the box, and put the panels back. The incoming 5 jumper wires needed a small indentation in the side of the box to not prevent the box from closing.
 
-[{% img left https://lh5.googleusercontent.com/-UjFXd_iX4wg/UK_LGHwB1GI/AAAAAAAACGM/Y9dOC2JLMu0/s400/2012-11-01%252010.51.22.jpg 'Power button of an electric kettle' %}](https://picasaweb.google.com/lh/photo/v54UgP-UYdQKngGBXIkVdtMTjNZETYmyPJy0liipFm0?feat=directlink)
+I hot glued the battery to the inner back wall of the box, and stuck the charger and step-up modules on the battery using double sided-tape. Next, I hot glued the arduino down, taking care to allow enough around its USB port. This is necessary if the code ever needs to be changed.
 
-[{% img left https://lh5.googleusercontent.com/-pZWML6wLvMk/UK_NhINxrhI/AAAAAAAACHc/8dvYICW8AA8/s400/2012-11-01%252011.01.24.jpg 'Power button of an external hard drive' %}](https://picasaweb.google.com/lh/photo/F8GpZ42t2k7OnFWfgzGDW9MTjNZETYmyPJy0liipFm0?feat=directlink)
+Using a soldering rod, I made holes on the bottom for the tripod and audio jack. This can be a bit tricky because if the hole gets too big, it's basically useless. Similarly, I made holes for the switch, potentiometer and an OTG cable that I connected to the TP4056 charger module. I secured these components using epoxy, to prevent them from coming loose due to wear and tear.
 
-[{% img left https://lh6.googleusercontent.com/-1L7v_5CYtq8/UK_NndJB_HI/AAAAAAAACHk/se84006Yoyo/s400/2012-11-01%252011.37.17.jpg 'Power button of an IKEA bedside lamp' %}](https://picasaweb.google.com/lh/photo/2O6MNRL11LHZaOWy5ucSFdMTjNZETYmyPJy0liipFm0?feat=directlink)
-
+![alt-text-1](https://raw.github.com/jayanth-rajakumar/ledmat/master/i_top.jpg "title-1") ![alt-text-2](https://raw.github.com/jayanth-rajakumar/ledmat/master/i_bottom.jpg "title-2")
 
 ## Setting up the software environment
 
