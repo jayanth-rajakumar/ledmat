@@ -199,7 +199,7 @@ I hot glued the battery to the inner back wall of the box, and stuck the charger
 Using a soldering rod, I made holes on the bottom for the tripod and audio jack. This can be a bit tricky because if the hole gets too big, it's basically useless. Similarly, I made holes for the switch, potentiometer and an OTG cable that I connected to the TP4056 charger module. I secured these components using epoxy, to prevent them from coming loose due to wear and tear.
              
 Click on the below image to see the full sized version.
-[![IMAGE ALT TEXT](https://raw.github.com/jayanth-rajakumar/ledmat/master/panorama_small.jpg)](https://raw.github.com/jayanth-rajakumar/ledmat/master/panorama.jpg)
+[![IMAGE ALT TEXT](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama_small.jpg)](https://raw.github.com/jayanth-rajakumar/ledmat/master/docs/panorama.jpg)
 
 ## Setting up the software environment
 
