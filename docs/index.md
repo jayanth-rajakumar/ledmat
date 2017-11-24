@@ -166,6 +166,7 @@ Some other tools and components you might require are.
 7. Download this repository and extract the ledmat.ino file. Open it, set the board to Arduino Nano in the Tools menu. Also make sure the correct Port is selected.
 8. Upload the sketch, plug in the stackmat and enjoy!
 
+Update (24/11/17): The MD_MAX72XX library has been taken down from Github. You can download an older version from [this mirror](https://drive.google.com/open?id=1zpzU6f5sRtBbgDiB4JvZTRR3FebU8nU-). Since the latest MD_Parola would cause compatibility issues, use [this version](https://drive.google.com/file/d/1EsGIoJ9LIOWHigCuonSvWNB8WLFm7dqu/view?usp=sharing).
 
 ## Making a portable power supply unit
 
