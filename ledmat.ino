@@ -1,13 +1,13 @@
 #include <MD_Parola.h>
 #include <MD_MAX72xx.h>
 #include <SPI.h>
-
+#include<SoftwareSerial.h>
 
 #define MAX_DEVICES 5
 #define CLK_PIN   13
 #define DATA_PIN  11
 #define CS_PIN    10
-
+SoftwareSerial S(8,9);
 
 MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES);
 
@@ -289,10 +289,11 @@ void setup()
   P.setFont(xantofont);
 
  
-  Serial.begin(115200);
+  S.begin(9600);
   pinMode(serial_in, INPUT);
   digitalWrite(serial_in,HIGH);
 
+/*
      while(1)
    
   {
@@ -300,7 +301,7 @@ void setup()
     if(temp>56000 and temp<66000)
     break;
   }
-  
+  */
 }
 
 void loop() {
@@ -346,11 +347,11 @@ void loop() {
             
   for(int k=0;k<90;k++)
   {
-   Serial.print(String(arr[k]));
+   //Serial.print(String(arr[k]));
   }
   
   
-  Serial.print("\n");
+  //Serial.print("\n");
   pulse=1;packet="";current_time="";
   /*
   for(int k=1;arr[k]!=0;k++)
@@ -384,6 +385,7 @@ void loop() {
   {
     P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
     P.displayAnimate(); 
+    S.println(current_time);
   }
   else
   {
@@ -396,6 +398,8 @@ void loop() {
         {
           P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
           P.displayAnimate(); 
+          current_time.toCharArray(charbuf,10);
+          S.println(current_time);
         }
     
    
@@ -436,7 +440,8 @@ void isr()
 
  if(m1-m2>58000 and begin_==true)
   {
-    Serial.println("Start");begin_=false;
+   // Serial.println("Start");
+    begin_=false;
     
   }
   else
