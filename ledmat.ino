@@ -3,13 +3,13 @@
 #include <SPI.h>
 
 
-#define MAX_DEVICES 5
+#define HARDWARE_TYPE MD_MAX72XX::FC16_HW
+#define MAX_DEVICES 4
 #define CLK_PIN   13
 #define DATA_PIN  11
-#define CS_PIN    10
+#define CS_PIN    7
 
-
-MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES);
+MD_Parola P = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
 
 MD_MAX72XX::fontType_t xantofont[] PROGMEM = {
   0,    // 0 - 'Empty Cell'
@@ -282,46 +282,49 @@ int twopwr(int);
 
 
 
-void setup()
-{
- P.begin();
+void setup() {
+  P.begin();
+ //Change 0 to any 0-15 integer to fix brightness
   P.setIntensity(0);
+  P.displayClear();
   P.setFont(xantofont);
-
  
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(serial_in, INPUT);
   digitalWrite(serial_in,HIGH);
-
-     while(1)
-   
-  {
-    temp=pulseIn(serial_in, LOW);
-    if(temp>56000 and temp<66000)
-    break;
-  }
   
+  Serial.print("while:\n");
+  /*while(true) {
+    temp=pulseIn(serial_in, LOW);
+    if(temp>56000 && temp<66000)
+    break;
+  }*/
 }
 
 void loop() {
+  Serial.print("loop\n");
+  //P.setTextAlignment(PA_CENTER);
+  //P.print("real");
 
   i=0,toggle=0;
-  for(int k=0;k<90;k++)
-  arr[k]=0;
+  
+  for(int k = 0; k < 90; k++) {
+    arr[k] = 0;
+  }
+
   long test_=millis();
 
-  /*
+  
   attachInterrupt(digitalPinToInterrupt(serial_in), isr, CHANGE);
   while(toggle==0)
   {
-    if(millis()-test_>90)
-    {
+    if(millis()-test_>90) {
       P.displayText("-:--.--", PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
        P.displayAnimate();
     }
   }
   detachInterrupt(digitalPinToInterrupt(serial_in));
-  */
+  
 
   delayMicroseconds(416);
   
@@ -371,15 +374,19 @@ void loop() {
     else
     packet+="0";
     }
-  //  Serial.println(packet);
- for(int k=1;k<=5;k++)
- getbytes(packet.substring(k*10+1,(k+1)*10-1));
+  Serial.print("packet: ");
+  Serial.println(packet);
+  for(int k=1;k<=5;k++) {
+    getbytes(packet.substring(k*10+1,(k+1)*10-1));
+  }
 
- current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
+  Serial.println(current_time);
+  current_time=current_time.substring(0,1)+':'+current_time.substring(1,3)+'.'+current_time.substring(3,5);
   
   char charbuf[10];
   current_time.toCharArray(charbuf,10);
 
+  Serial.println(charbuf);
   if(isDigit(charbuf[0]) and isDigit(charbuf[6]) and isDigit(charbuf[2]) and isDigit(charbuf[3]) and isDigit(charbuf[5]))
   {
     P.displayText(charbuf, PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
@@ -401,33 +408,13 @@ void loop() {
    
   }
 
-  //Read pot and adjust brightness
-  {
-      int pot=analogRead(A0);   
-      if(pot<100)
-         P.setIntensity(0);
-      else if(pot>150 and pot<250)
-         P.setIntensity(3);
-      else if(pot>300 and pot<400)
-         P.setIntensity(6);
-      else if(pot>450 and pot<550)
-         P.setIntensity(9);
-      else if(pot>600 and pot<700)
-         P.setIntensity(12);
-      else if(pot>750 and pot<850)
-         P.setIntensity(15);
-    
-  }
-  long test=millis();
-  while(digitalRead(serial_in)==0)
-  {
-    if(millis()-test>90)
-    {
+  long test = millis();
+  while(digitalRead(serial_in) == 0) {
+    if(millis() - test > 90) {
       P.displayText("-:--.--", PA_LEFT, 0, 0, PA_PRINT, PA_SCROLL_UP);
-       P.displayAnimate();
+      P.displayAnimate();
     }
   }
-  
 }
 
 void isr()
@@ -528,9 +515,6 @@ char qj_fix(char ch)
 
     case 'r':
     return '9';
-    break;
-
-    
+    break;  
   }
 }
-
